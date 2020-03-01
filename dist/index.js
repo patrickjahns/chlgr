@@ -10588,7 +10588,7 @@ async function createOrUpdatePr(env, commit_msg, body) {
   const { data: pr } = await env.octokit.pulls.list({
     state: 'open',
     base: env.config.base_branch,
-    head: `${env.config.release_branch}`,
+    head: `${env.repo_context.owner}:${env.config.release_branch}`,
     ...env.repo_context
   })
 
