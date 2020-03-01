@@ -41,5 +41,5 @@ runs:
   main: 'dist/index.js'
 
 branding:
-  icon: trending-up
+  icon: edit
   color: orange
