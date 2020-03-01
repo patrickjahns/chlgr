@@ -1,0 +1,45 @@
+name: 'chlgr'
+description: 'Creates a changelog and provides the content via pull requests to be merged for a future release'
+
+inputs:
+  commit-msg-prefix:
+    description: 'A prefix to be used for the commit msg and pr title'
+    default: '[RELEASE]'
+    required: false
+  changelog-file:
+    description: 'The filename of the changelog'
+    required: false
+    default: 'CHANGELOG.md'
+  base-branch:
+    description: 'The base for the pull-request chlgr creates'
+    default: 'master'
+    required: false
+  release-branch:
+    description: >
+      The branch used by chlgr for pushing the changelog and basing
+      the pull request off towards `base-branch`
+    default: 'release/next'
+    required: false
+  release-version:
+    description: >
+      If provided, this will be used as version for the changelog and
+      the pull request title
+    default: 'unknown'
+    required: false
+  dry-run:
+    description: 'If set, the action will not push the changelog or create a pull request'
+    required: false
+  token:
+    description: >
+      Auth token used to push the changes back to github and create the pull request with.
+      [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+    default: ${{ github.token }}
+    required: false
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+
+branding:
+  icon: trending-up
+  color: orange

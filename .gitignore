@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+*.pem
+.env
+coverage
+dist/**
+dist/index.js

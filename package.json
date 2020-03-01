@@ -1,0 +1,51 @@
+{
+  "name": "chlgr-action",
+  "version": "1.0.0",
+  "description": "Github Action that creates a changelog and provides the content via pull requests to be merged for a release",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build index.js",
+    "test": "jest",
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage",
+    "lint": "eslint '**/*.js'",
+    "prettier": "prettier --write **/*.js",
+    "gendocs": "node helper/update-readme.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrickjahns/chlgr.git"
+  },
+  "author": "Patrick Jahns <github@patrickjahns.de> (https://github.com/patrickjahns)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patrickjahns/chlgr/issues"
+  },
+  "homepage": "https://github.com/patrickjahns/chlgr#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.0",
+    "@actions/exec": "^1.0.3",
+    "@actions/github": "^2.1.0",
+    "@octokit/webhooks": "^7.0.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.21.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.0",
+    "eslint-plugin-prettier": "3.1.2",
+    "jest": "25.1.0",
+    "lint-staged": "10.0.7",
+    "nock": "11.7.2",
+    "nodemon": "2.0.2",
+    "prettier": "1.19.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

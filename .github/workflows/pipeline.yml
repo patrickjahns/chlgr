@@ -1,0 +1,58 @@
+name: test
+on: [push, pull_request]
+
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: prepare env
+      run: npm install
+    - name: lint
+      run: npm run lint
+    - name: test
+      run: npm run test
+
+  test-action:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: prepare env
+      run: npm install
+    - name: built
+      run: npm run build
+    - name: dry-run
+      id: changelog
+      uses: ./
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DRY_RUN: 'true'
+
+  dist:
+    needs:
+     - unit-test
+     - test-action
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: prepare env
+        run: npm install
+      - name: built
+        run: npm run build
+      - name: update readme
+        run: npm run gendocs
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4.0.0
+        with:
+          commit_message: 'updated dist files'
