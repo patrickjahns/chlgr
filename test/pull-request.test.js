@@ -24,13 +24,17 @@ describe('pull-request', () => {
     }
     nock('https://api.github.com')
       .get('/repos/patrickjahns/chlgr/pulls')
-      .query({ state: 'open', base: 'master', head: 'release/next' })
+      .query({
+        state: 'open',
+        base: 'master',
+        head: 'patrickjahns:release/next'
+      })
       .reply(200, [])
     nock('https://api.github.com')
       .post('/repos/patrickjahns/chlgr/pulls', body => {
         expect(body).toMatchObject({
-          body: `test`,
-          title: `test`,
+          body: 'test',
+          title: 'test',
           head: 'release/next',
           base: 'master',
           maintainer_can_modify: true
@@ -56,7 +60,11 @@ describe('pull-request', () => {
     }
     nock('https://api.github.com')
       .get('/repos/patrickjahns/chlgr/pulls')
-      .query({ state: 'open', base: 'master', head: 'release/next' })
+      .query({
+        state: 'open',
+        base: 'master',
+        head: 'patrickjahns:release/next'
+      })
       .reply(200, require('./fixtures/open_pull_request'))
     nock('https://api.github.com')
       .patch('/repos/patrickjahns/chlgr/pulls/5', body => {
