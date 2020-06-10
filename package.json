@@ -24,7 +24,7 @@
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/exec": "^1.0.4",
-    "@actions/github": "^2.2.0",
+    "@actions/github": "^3.0.0",
     "@octokit/webhooks": "^7.6.4"
   },
   "devDependencies": {
