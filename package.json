@@ -23,7 +23,7 @@
   "homepage": "https://github.com/patrickjahns/chlgr#readme",
   "dependencies": {
     "@actions/core": "^1.6.0",
-    "@actions/exec": "^1.0.4",
+    "@actions/exec": "^1.1.0",
     "@actions/github": "^2.2.0",
     "@octokit/webhooks": "^9.17.0"
   },
